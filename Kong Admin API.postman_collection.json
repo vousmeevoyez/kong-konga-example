@@ -1,0 +1,613 @@
+{
+	"info": {
+		"_postman_id": "6c465330-1b4b-4b9a-915e-5171a9e4961d",
+		"name": "Kong Admin API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Create Service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "edecb8df-728f-4597-a89f-f51d0b01119c",
+								"exec": [
+									"response = pm.response.json()",
+									"console.log(\"Create Service\");",
+									"",
+									"pm.test(\"should data contain id\", () => {",
+									"    pm.expect(response.data, [\"id\"]); ",
+									"    pm.environment.set(\"service_id\",response.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"admin-api\",\n\t\"host\": \"localhost\",\n\t\"port\": 8001\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": "{{service_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": "{{service_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Routes",
+			"item": [
+				{
+					"name": "Add Route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "edecb8df-728f-4597-a89f-f51d0b01119c",
+								"exec": [
+									"response = pm.response.json()",
+									"console.log(\"Get Route\");",
+									"",
+									"pm.test(\"should data contain id\", () => {",
+									"    pm.expect(response.data, [\"id\"]); ",
+									"    pm.environment.set(\"route_id\",response.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"paths\": [\"/admin-api\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id/routes",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id",
+								"routes"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": "{{service_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Routes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id/routes",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id",
+								"routes"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": "{{service_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Route",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id/routes/:route_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id",
+								"routes",
+								":route_id"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": ""
+								},
+								{
+									"key": "route_id",
+									"value": "{{service_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Route",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id/routes/:route_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id",
+								"routes",
+								":route_id"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": "{{service_id}}"
+								},
+								{
+									"key": "route_id",
+									"value": "{{route_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Plugins",
+			"item": [
+				{
+					"name": "Activate Services Plugin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "key-auth",
+									"description": "(Required) Plugin Name",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{port}}/services/:service_id/plugins",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"services",
+								":service_id",
+								"plugins"
+							],
+							"variable": [
+								{
+									"key": "service_id",
+									"value": "{{service_id}}"
+								}
+							]
+						},
+						"description": "Activate plugin at Service level"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Consumer",
+			"item": [
+				{
+					"name": "Key Auth",
+					"item": [
+						{
+							"name": "Create Key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f83b5948-bd66-4375-ac5e-83216fd6c795",
+										"exec": [
+											"response = pm.response.json()",
+											"console.log(\"Create Consumer Key\");",
+											"",
+											"pm.test(\"should data contain key\", () => {",
+											"    pm.expect(response.data, [\"key\"]); ",
+											"    pm.environment.set(\"consumer_key\",response.key);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}:{{port}}/consumers/:consumer_id/key-auth",
+									"host": [
+										"{{base_url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"consumers",
+										":consumer_id",
+										"key-auth"
+									],
+									"variable": [
+										{
+											"key": "consumer_id",
+											"value": "{{consumer_id}}"
+										}
+									]
+								},
+								"description": "Register consumer and generate a key"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Create Consumer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f83b5948-bd66-4375-ac5e-83216fd6c795",
+								"exec": [
+									"response = pm.response.json()",
+									"console.log(\"Create Consumer\");",
+									"",
+									"pm.test(\"should data contain id\", () => {",
+									"    pm.expect(response.data, [\"id\"]); ",
+									"    pm.environment.set(\"consumer_id\",response.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "test-consumer",
+									"description": "(Required) Consumer Name",
+									"type": "text"
+								},
+								{
+									"key": "custom_id",
+									"value": "{{$guid}}",
+									"description": "(Required) Plugin Name",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{port}}/consumers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consumers",
+								""
+							]
+						},
+						"description": "Create Consumer who's going to use our upstream API"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Consumers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f83b5948-bd66-4375-ac5e-83216fd6c795",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "test-consumer",
+									"description": "(Required) Consumer Name",
+									"type": "text"
+								},
+								{
+									"key": "custom_id",
+									"value": "{{$guid}}",
+									"description": "(Required) Plugin Name",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{port}}/consumers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consumers",
+								""
+							]
+						},
+						"description": "Create Consumer who's going to use our upstream API"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Consumer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f83b5948-bd66-4375-ac5e-83216fd6c795",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/consumers/:consumer_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consumers",
+								":consumer_id"
+							],
+							"variable": [
+								{
+									"key": "consumer_id",
+									"value": "{{consumer_id}}"
+								}
+							]
+						},
+						"description": "Create Consumer who's going to use our upstream API"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Consumer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f83b5948-bd66-4375-ac5e-83216fd6c795",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{port}}/consumers/:consumer_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consumers",
+								":consumer_id"
+							],
+							"variable": [
+								{
+									"key": "consumer_id",
+									"value": "{{consumer_id}}"
+								}
+							]
+						},
+						"description": "Create Consumer who's going to use our upstream API"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get Node Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}:{{port}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Node Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}:{{port}}/status",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
