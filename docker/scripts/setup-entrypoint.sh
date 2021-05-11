@@ -31,14 +31,15 @@ curl -i -X POST "http://${KONG_HOST}:${KONG_PORT}/services/${ADMIN_ROUTE}/routes
     
 ## ADD KEY-AUTH PLUGIN TO SERVICE
 curl -X POST "http://${KONG_HOST}:${KONG_PORT}/services/${ADMIN_ROUTE}/plugins" \
-    --data "name=key-auth-referer"
+    --data "name=key-auth"  \
+    --data "config.key_names=apikey"
 
 ## MAKE CONGA CONSUMER
-curl -X POST "http://${KONG_HOST}:${KONG_PORT}/consumers/" \
+curl -X POST "http://${KONG_HOST}:${KONG_PORT}/consumers" \
  --data 'username=konga' \
  --data "custom_id=${KONGA_CONSUMER_ID}"
 
 ## REGISTER PLUGIN IN CONSUMER
 curl -X POST \
-  "http://${KONG_HOST}:${KONG_PORT}/consumers/${KONGA_CONSUMER_ID}/key-auth" \
-  --data "key=${AUTH_KEY}"
+  "http://${KONG_HOST}:${KONG_PORT}/consumers/konga/key-auth" \
+  -d "key=${AUTH_KEY}"
