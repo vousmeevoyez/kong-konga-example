@@ -17,8 +17,6 @@ do
   sleep 1
 done
 
-echo $AUTH_KEY
-
 ## MAKE ADM SERVICE
 curl -i -X POST "http://${KONG_HOST}:${KONG_PORT}/services" \
   --data "name=${ADMIN_ROUTE}" \

@@ -2,9 +2,14 @@
 FROM ubuntu
 
 RUN  apt update
-RUN  apt install curl net-tools iputils-ping -qy
+RUN  apt install curl -qy
 
-COPY scripts/file-env.sh /usr/local/bin/
-COPY scripts/setup-entrypoint.sh /usr/local/bin/
+WORKDIR /home
+
+COPY scripts/file-env.sh ~
+COPY scripts/setup-entrypoint.sh ~
+
+RUN [ "chmod", "+x", "file-env.sh" ]
+RUN [ "chmod", "+x", "setup-entrypoint.sh" ]
 
 ENTRYPOINT ["setup-entrypoint.sh"]
