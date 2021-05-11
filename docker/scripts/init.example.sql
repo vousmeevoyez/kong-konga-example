@@ -1,0 +1,7 @@
+CREATE USER any_user WITH PASSWORD 'any_password';
+CREATE DATABASE any_db;
+GRANT ALL PRIVILEGES ON DATABASE any_db TO any_user;
+
+CREATE USER any_user_2 WITH PASSWORD 'any_password';
+CREATE DATABASE any_db_2;
+GRANT ALL PRIVILEGES ON DATABASE any_db_2 TO any_user_2;
