@@ -1,15 +1,11 @@
-# vim:set ft=dockerfile:
-FROM ubuntu
+FROM ubuntu:latest
 
 RUN  apt update
 RUN  apt install curl -qy
 
 WORKDIR /home
 
-COPY scripts/file-env.sh ~
-COPY scripts/setup-entrypoint.sh ~
+COPY --chown=755 scripts/file-env.sh /home
+COPY --chown=755 scripts/setup-entrypoint.sh /home
 
-RUN [ "chmod", "+x", "file-env.sh" ]
-RUN [ "chmod", "+x", "setup-entrypoint.sh" ]
-
-ENTRYPOINT ["setup-entrypoint.sh"]
+ENTRYPOINT ["/home/setup-entrypoint.sh"]
