@@ -2,5 +2,5 @@
 
 docker network create kong-net
 docker-compose down --rmi local
-docker-compose up --build
-
+docker-compose up --build -d
+docker-compose -f docker-compose.production.yml up -d kong

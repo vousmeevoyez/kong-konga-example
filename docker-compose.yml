@@ -5,7 +5,7 @@ services:
           context: docker
           dockerfile: postgres.dockerfile 
         environment:
-          POSTGRES_PASSWORD: master
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         healthcheck:
           test: ["CMD", "pg_isready", "-U", "postgres"]
           interval: 10s
@@ -15,10 +15,12 @@ services:
         restart: on-failure
         stdin_open: true
         tty: true
+        volumes: 
+          - persist_volume:/var/lib/postgresql/data
         ports: 
           - 5432:5432
         networks:
-        - kong-net
+          - kong-net
         
     kong-migrations:
       image: kong:latest
@@ -33,7 +35,7 @@ services:
        database:
           condition: service_healthy
       networks:
-      - kong-net
+        - kong-net
       restart: on-failure
 
     kong:
@@ -54,13 +56,13 @@ services:
         kong-migrations:
           condition: service_completed_successfully
       ports:
-      - $KONG_PROXY_PORT:8000
-      - $KONG_PROXY_SSL_PORT:8443
-      - ${KONG_PROXY_ADMIN_API_PORT}
+        - $KONG_PROXY_PORT:8000
+        - $KONG_PROXY_SSL_PORT:8443
+        - ${KONG_PROXY_ADMIN_API_PORT}
         #- $KONG_PROXY_ADMIN_API_PORT:8001
-        #- $KONG_PROXY_ADMIN_SSL_API_PORT:8444
+        #- $KONG_PROXY_ADMIN_SSL_API_PORT:8444      
       networks:
-      - kong-net
+        - kong-net
 
     setup:
       build: 
@@ -77,7 +79,7 @@ services:
         kong:
           condition: service_started
       networks:
-      - kong-net
+        - kong-net
 
     konga-prepare:
       image: pantsel/konga
@@ -103,15 +105,19 @@ services:
         KONGA_HOOK_TIMEOUT: 10000
       restart: on-failure
       ports:
-      - $KONGA_PORT:1337
+        - $KONGA_PORT:1337
       depends_on:
         konga-prepare:
           condition: service_completed_successfully
         setup: 
           condition: service_completed_successfully
       networks:
-      - kong-net
+        - kong-net
         
 networks:
   kong-net:
     external: true
+
+volumes:
+  persist_volume:
+    

@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  kong:
+    image: kong:latest
+    restart: on-failure
+    environment:
+      KONG_DATABASE: ${KONG_DATABASE}
+      KONG_PG_HOST: ${KONG_DB_HOST}
+      KONG_PG_DATABASE: ${KONG_DB_NAME}
+      KONG_PG_USER: ${KONG_DB_USERNAME}
+      KONG_PG_PASSWORD: ${KONG_DB_PASSWORD}
+      KONG_PROXY_ACCESS_LOG: ${KONG_PROXY_ACCESS_LOG}
+      KONG_ADMIN_ACCESS_LOG: ${KONG_ADMIN_ACCESS_LOG}
+      KONG_PROXY_ERROR_LOG: ${KONG_PROXY_ERROR_LOG}
+      KONG_ADMIN_ERROR_LOG: ${KONG_ADMIN_ERROR_LOG}
+      KONG_ADMIN_LISTEN: 127.0.0.1:8001
+    ports:
+      - $KONG_PROXY_PORT:8000
+      - $KONG_PROXY_SSL_PORT:8443      
+    networks:
+      - kong-net
+      
+networks:
+  kong-net:
+    external: true
+      
