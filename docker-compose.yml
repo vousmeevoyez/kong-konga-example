@@ -16,7 +16,7 @@ services:
         stdin_open: true
         tty: true
         volumes: 
-          - persist_volume:/var/lib/postgresql/data
+          - kong_persist_volume:/var/lib/postgresql/data
         ports: 
           - 5432:5432
         networks:
@@ -121,5 +121,5 @@ networks:
     external: true
 
 volumes:
-  persist_volume:
+  kong_persist_volume:
     
