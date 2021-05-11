@@ -21,6 +21,7 @@ services:
           - 5432:5432
         networks:
           - kong-net
+          - konga-net
         
     kong-migrations:
       image: kong:latest
@@ -58,8 +59,7 @@ services:
       ports:
         - $KONG_PROXY_PORT:8000
         - $KONG_PROXY_SSL_PORT:8443
-        - ${KONG_PROXY_ADMIN_API_PORT}
-        #- $KONG_PROXY_ADMIN_API_PORT:8001
+        - $KONG_PROXY_ADMIN_API_PORT:8001
         #- $KONG_PROXY_ADMIN_SSL_API_PORT:8444      
       networks:
         - kong-net
@@ -85,7 +85,7 @@ services:
       image: pantsel/konga
       command: "-c prepare -a postgres -u postgresql://${KONGA_DB_USERNAME}:${KONGA_DB_PASSWORD}@${KONGA_DB_HOST}:5432/${KONGA_DB_NAME}"
       networks:
-        - kong-net
+        - konga-net
       restart: on-failure
       depends_on:
         database:
@@ -112,10 +112,12 @@ services:
         setup: 
           condition: service_completed_successfully
       networks:
-        - kong-net
+        - konga-net
         
 networks:
   kong-net:
+    external: true
+  konga-net:
     external: true
 
 volumes:
