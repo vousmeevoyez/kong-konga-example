@@ -1,4 +1,4 @@
-# Status
+# Support
 [![Coffee](https://badgen.net/badge/Buy%20Me/A%20Coffee/purple?icon=kofi)](https://www.buymeacoffee.com/vousmeevoyez)
 
 # Setup Kong + Konga using Docker compose
