@@ -1,4 +1,6 @@
+#!/bin/bash
 docker network create kong-net
-docker-compose up --build -d db kong-migrations
-sleep 10
-docker-compose up --build -d kong konga
+docker network create konga-net
+docker-compose down --rmi local
+docker-compose up --build -d
+docker-compose -f docker-compose.production.yml up -d kong
