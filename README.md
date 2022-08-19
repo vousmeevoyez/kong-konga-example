@@ -5,3 +5,8 @@ If you find this repository is useful. Please support me through link below so i
 # Setup Kong + Konga using Docker compose
 This repository contains required file for running Kong + Konga using Docker
 you can checkout the article in [here](https://dev.to/vousmeevoyez/setup-kong-konga-part-2-dan)
+
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
